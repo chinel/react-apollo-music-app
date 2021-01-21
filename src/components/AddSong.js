@@ -7,10 +7,31 @@ import {
   DialogTitle,
   InputAdornment,
   TextField,
+  makeStyles,
 } from "@material-ui/core";
 import { AddBoxOutlined, Link } from "@material-ui/icons";
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+    alignItems: "center",
+  },
+  urlInput: {
+    margin: theme.spacing(1),
+  },
+  addSongButton: {
+    margin: theme.spacing(1),
+  },
+  dialog: {
+    textAlign: "center",
+  },
+  thumbnail: {
+    width: "90%",
+  },
+}));
+
 function AddSong() {
+  const classes = useStyles();
   const [dialog, setDialog] = useState(false);
 
   function handleCloseDialog() {
@@ -18,11 +39,17 @@ function AddSong() {
   }
 
   return (
-    <div>
-      <Dialog open={dialog} onClose={handleCloseDialog}>
+    <div className={classes.container}>
+      <Dialog
+        className={classes.dialog}
+        open={dialog}
+        onClose={handleCloseDialog}
+        scroll="paper"
+      >
         <DialogTitle>Edit Song</DialogTitle>
         <DialogContent>
           <img
+            className={classes.thumbnail}
             src="https://i1.sndcdn.com/artworks-000670470790-ej1gvb-t500x500.jpg"
             alt="song thumbnail"
           />
@@ -45,19 +72,21 @@ function AddSong() {
         </DialogActions>
       </Dialog>
       <TextField
+        className={classes.urlInput}
         placeholder="Add Youtube or Soundcloud Url"
         fullWidth
         margin="normal"
         type="url"
         InputProps={{
           startAdornment: (
-            <InputAdornment>
+            <InputAdornment position="start">
               <Link />
             </InputAdornment>
           ),
         }}
       />
       <Button
+        className={classes.addSongButton}
         onClick={() => setDialog(true)}
         variant="contained"
         color="primary"
