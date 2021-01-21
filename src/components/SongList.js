@@ -1,5 +1,6 @@
 import React from "react";
 import { CircularProgress } from "@material-ui/core";
+import { Song } from ".";
 
 function SongList() {
   let loading = false;
@@ -24,9 +25,13 @@ function SongList() {
       </div>
     );
   }
-  return <div>{Array.from({ length: 10 }, () => song).map((song, i) => (
-    
-  ))}</div>;
+  return (
+    <div>
+      {Array.from({ length: 10 }, () => song).map((song, i) => (
+        <Song key={i} song={song} />
+      ))}
+    </div>
+  );
 }
 
 export default SongList;
