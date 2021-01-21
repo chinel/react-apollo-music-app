@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, InputAdornment, TextField } from "@material-ui/core";
 import { AddBoxOutlined, Link } from "@material-ui/icons";
 
 function AddSong() {
+  const [dialog, setDialog] = useState(false);
   return (
     <div>
       <TextField
@@ -18,7 +19,12 @@ function AddSong() {
           ),
         }}
       />
-      <Button variant="contained" color="primary" endIcon={<AddBoxOutlined />}>
+      <Button
+        onClick={() => setDialog(true)}
+        variant="contained"
+        color="primary"
+        endIcon={<AddBoxOutlined />}
+      >
         Add
       </Button>
     </div>
