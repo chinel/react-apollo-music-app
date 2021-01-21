@@ -7,7 +7,7 @@ function AddSong() {
     <div>
       <TextField
         placeholder="Add Youtube or Soundcloud Url"
-        fullwidth
+        fullWidth
         margin="normal"
         type="url"
         InputProps={{
