@@ -2,7 +2,14 @@ import React from "react";
 import { CircularProgress } from "@material-ui/core";
 
 function SongList() {
-  let loading = true;
+  let loading = false;
+
+  const song = {
+    title: "First Song",
+    artist: "Manny",
+    thumbnail:
+      "https://i1.sndcdn.com/artworks-000670470790-ej1gvb-t500x500.jpg",
+  };
   if (loading) {
     return (
       <div
@@ -17,7 +24,9 @@ function SongList() {
       </div>
     );
   }
-  return <div>Song List</div>;
+  return <div>{Array.from({ length: 10 }, () => song).map((song, i) => (
+    
+  ))}</div>;
 }
 
 export default SongList;
