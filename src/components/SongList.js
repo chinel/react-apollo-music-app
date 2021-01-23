@@ -20,7 +20,7 @@ function SongList() {
           alignItems: "center",
           marginTop: 50,
         }}
-      >
+      > 
         <CircularProgress />
       </div>
     );
