@@ -2,6 +2,12 @@ import React from "react";
 import { Typography } from "@material-ui/core";
 
 function QueuedSongList() {
+  const song = {
+    title: "First Song",
+    artist: "Manny",
+    thumbnail:
+      "https://i1.sndcdn.com/artworks-000670470790-ej1gvb-t500x500.jpg",
+  };
   return (
     <div
       style={{
@@ -11,6 +17,7 @@ function QueuedSongList() {
       <Typography color="textSecondary" variant="button">
         QUEUE (5)
       </Typography>
+      {Array.from({length: 5},() => song).map((song, i) => ())}
     </div>
   );
 }
