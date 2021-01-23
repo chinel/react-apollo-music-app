@@ -11,7 +11,12 @@ function App() {
     <>
       <Header />
       <Grid container space={3}>
-        <Grid item xs={12} md={7} style={{ paddingTop: 80 }}>
+        <Grid
+          item
+          xs={12}
+          md={7}
+          style={{ paddingTop: greaterThanSm ? 80 : 10 }}
+        >
           <AddSong />
           <SongList />
         </Grid>
