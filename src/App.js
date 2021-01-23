@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      {greaterThanSm && <Header />}
       <Grid container space={3}>
         <Grid
           item
