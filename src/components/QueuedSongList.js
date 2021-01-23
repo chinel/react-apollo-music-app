@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
+import QueuedSong from "./QueuedSong";
 
 function QueuedSongList() {
   const song = {
@@ -17,7 +18,9 @@ function QueuedSongList() {
       <Typography color="textSecondary" variant="button">
         QUEUE (5)
       </Typography>
-      {Array.from({length: 5},() => song).map((song, i) => ())}
+      {Array.from({ length: 5 }, () => song).map((song, i) => (
+        <QueuedSong key={{ i }} song={song} />
+      ))}
     </div>
   );
 }
