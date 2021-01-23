@@ -28,11 +28,21 @@ const useStyles = makeStyles({
 function QueuedSong({ song: { thumbnail, artist, title } }) {
   const classes = useStyles();
   return (
-    <div>
-      <Avatar src={thumbnail} alt="Song thumbnail"></Avatar>
-      <div>
-        <Typography variant="subtitle">{title}</Typography>
-        <Typography color="textSecondary" variant="body2">
+    <div className={classes.container}>
+      <Avatar
+        src={thumbnail}
+        alt="Song thumbnail"
+        className={classes.avatar}
+      ></Avatar>
+      <div className={classes.songInfoContainer}>
+        <Typography variant="subtitle" className={classes.text}>
+          {title}
+        </Typography>
+        <Typography
+          color="textSecondary"
+          variant="body2"
+          className={classes.text}
+        >
           {artist}
         </Typography>
       </div>
