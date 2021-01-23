@@ -43,9 +43,9 @@ function SongPlayer() {
   const classes = useStyles();
   return (
     <>
-      <Card variant="outline">
-        <div>
-          <CardContent>
+      <Card variant="outline" className={classes.container}>
+        <div className={classes.details}>
+          <CardContent className={classes.content}>
             <Typography variant="h5" component="h3">
               Title
             </Typography>
@@ -53,12 +53,12 @@ function SongPlayer() {
               Artist
             </Typography>
           </CardContent>
-          <div>
+          <div className={classes.controls}>
             <IconButton>
               <SkipPrevious />
             </IconButton>
             <IconButton>
-              <PlayArrow />
+              <PlayArrow className={classes.playIcon} />
             </IconButton>
             <IconButton>
               <SkipNext />
@@ -69,7 +69,10 @@ function SongPlayer() {
           </div>
           <Slider type="range" min={0} max={1} step={0.01} />
         </div>
-        <CardMedia image="https://i1.sndcdn.com/artworks-000670470790-ej1gvb-t500x500.jpg" />
+        <CardMedia
+          className={classes.thumbnail}
+          image="https://i1.sndcdn.com/artworks-000670470790-ej1gvb-t500x500.jpg"
+        />
       </Card>
       <QueuedSongList />
     </>
