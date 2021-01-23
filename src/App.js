@@ -4,6 +4,7 @@ import { Grid, useMediaQuery } from "@material-ui/core";
 
 function App() {
   // const matches = useMediaQuery("(min-width: 600px)"); this can also be done as shown below using the theme
+  const greaterThanSm = useMediaQuery((theme) => theme.breakpoints.up("sm"));
   const greaterThanMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
   return (
