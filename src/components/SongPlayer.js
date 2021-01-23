@@ -6,11 +6,41 @@ import {
   IconButton,
   Slider,
   Typography,
+  makeStyles,
 } from "@material-ui/core";
 import QueuedSongList from "./QueuedSongList";
 import { PlayArrow, SkipNext, SkipPrevious } from "@material-ui/icons";
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  details: {
+    display: "flex",
+    flexDirection: "column",
+    padding: "0px 15px",
+  },
+  content: {
+    flex: "1 0 auto",
+  },
+  thumbnail: {
+    width: 150,
+  },
+  controls: {
+    display: "flex",
+    alignItems: "center",
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+  },
+  playIcon: {
+    height: 38,
+    width: 38,
+  },
+}));
+
 function SongPlayer() {
+  const classes = useStyles();
   return (
     <>
       <Card variant="outline">
@@ -39,9 +69,7 @@ function SongPlayer() {
           </div>
           <Slider type="range" min={0} max={1} step={0.01} />
         </div>
-        <CardMedia
-         image="https://i1.sndcdn.com/artworks-000670470790-ej1gvb-t500x500.jpg"
-        />
+        <CardMedia image="https://i1.sndcdn.com/artworks-000670470790-ej1gvb-t500x500.jpg" />
       </Card>
       <QueuedSongList />
     </>
