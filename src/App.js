@@ -1,6 +1,6 @@
 import React from "react";
 import { AddSong, Header, SongList, SongPlayer } from "./components";
-import { Grid, useMediaQuery } from "@material-ui/core";
+import { Grid, useMediaQuery, Hidden } from "@material-ui/core";
 
 function App() {
   // const matches = useMediaQuery("(min-width: 600px)"); this can also be done as shown below using the theme
@@ -9,7 +9,12 @@ function App() {
 
   return (
     <>
-      {greaterThanSm && <Header />}
+      {/*greaterThanSm && <Header /> on way of hiding an element*/}
+
+      {/**A more declarative approach*/}
+      <Hidden only="xs">
+        <Header />
+      </Hidden>
       <Grid container space={3}>
         <Grid
           item
