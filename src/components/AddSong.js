@@ -10,6 +10,8 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { AddBoxOutlined, Link } from "@material-ui/icons";
+import SoundCloudPlayer from "react-player/soundcloud";
+import YouTubePlayer from "react-player/youtube";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -31,8 +33,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AddSong() {
+  const [url, setUrl] = useState("");
+  const [playable, setPlayable] = useState(false);
   const classes = useStyles();
   const [dialog, setDialog] = useState(false);
+
+  React.useEffect(() => {
+    const isPlayable =
+      SoundCloudPlayer.canPlay(url) || YouTubePlayer.canPlay(url);
+    setPlayable(isPlayable);
+  }, [url]);
 
   function handleCloseDialog() {
     setDialog(false);
@@ -73,6 +83,8 @@ function AddSong() {
       </Dialog>
       <TextField
         className={classes.urlInput}
+        onChange={(event) => setUrl(event.target.value)}
+        value={url}
         placeholder="Add Youtube or Soundcloud Url"
         fullWidth
         margin="normal"
@@ -86,6 +98,7 @@ function AddSong() {
         }}
       />
       <Button
+        disabled={!playable}
         className={classes.addSongButton}
         onClick={() => setDialog(true)}
         variant="contained"
