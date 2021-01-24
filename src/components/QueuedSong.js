@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Avatar,
-  IconButton,
-  Typography,
-  makeStyles,
-  useMediaQuery,
-} from "@material-ui/core";
+import { Avatar, IconButton, Typography, makeStyles } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 
 const useStyles = makeStyles({
@@ -41,7 +35,7 @@ function QueuedSong({ song: { thumbnail, artist, title } }) {
         className={classes.avatar}
       ></Avatar>
       <div className={classes.songInfoContainer}>
-        <Typography variant="subtitle" className={classes.text}>
+        <Typography variant="subtitle1" className={classes.text}>
           {title}
         </Typography>
         <Typography

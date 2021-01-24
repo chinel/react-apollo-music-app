@@ -43,13 +43,13 @@ function SongPlayer() {
   const classes = useStyles();
   return (
     <>
-      <Card variant="outline" className={classes.container}>
+      <Card variant="outlined" className={classes.container}>
         <div className={classes.details}>
           <CardContent className={classes.content}>
             <Typography variant="h5" component="h3">
               Title
             </Typography>
-            <Typography variant="subtitle" component="p" color="textSecondary">
+            <Typography variant="subtitle1" component="p" color="textSecondary">
               Artist
             </Typography>
           </CardContent>
