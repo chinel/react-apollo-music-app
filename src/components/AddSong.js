@@ -12,6 +12,7 @@ import {
 import { AddBoxOutlined, Link } from "@material-ui/icons";
 import SoundCloudPlayer from "react-player/soundcloud";
 import YouTubePlayer from "react-player/youtube";
+import ReactPlayer from "react-player";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -46,6 +47,21 @@ function AddSong() {
 
   function handleCloseDialog() {
     setDialog(false);
+  }
+
+  function handleEditSong({ player }) {
+    const nestedPlayer = player.player.player;
+    let songData;
+    if (nestedPlayer.getVideoData) {
+      songData = getYoutubeInfo(nestedPlayer);
+    }
+  }
+
+  function getYoutubeInfo(player) {
+    const duration = player.getDuration();
+    const { title, video_id, author } = player.getVideoData();
+    const thumbnail = `https://img.youtube.com/vi/${video_id}/0.jpg`;
+    return { duration, title, artist: author, thumbnail };
   }
 
   return (
@@ -107,6 +123,7 @@ function AddSong() {
       >
         Add
       </Button>
+      <ReactPlayer url={url} hidden onReady={handleEditSong} />
     </div>
   );
 }
