@@ -14,6 +14,6 @@ ReactDOM.render(
         <App />
       </React.StrictMode>
     </MuiThemeProvider>
-    , document.getElementById("root")
-  </ApolloProvider>
+  </ApolloProvider>,
+  document.getElementById("root")
 );
