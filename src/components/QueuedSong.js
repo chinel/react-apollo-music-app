@@ -41,7 +41,7 @@ function QueuedSong({ song: { thumbnail, artist, title } }) {
         className={classes.avatar}
       ></Avatar>
       <div className={classes.songInfoContainer}>
-        <Typography variant="subtitle" className={classes.text}>
+        <Typography variant="subtitle1" className={classes.text}>
           {title}
         </Typography>
         <Typography
