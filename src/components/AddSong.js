@@ -89,6 +89,7 @@ function AddSong() {
     });
   }
 
+  const { thumbnail, title, artist } = song;
   return (
     <div className={classes.container}>
       <Dialog
@@ -101,16 +102,29 @@ function AddSong() {
         <DialogContent>
           <img
             className={classes.thumbnail}
-            src="https://i1.sndcdn.com/artworks-000670470790-ej1gvb-t500x500.jpg"
+            src={thumbnail}
             alt="song thumbnail"
           />
-          <TextField margin="dense" name="title" label="Title" fullWidth />
-          <TextField margin="dense" name="artist" label="Artist" fullWidth />
+          <TextField
+            value={title}
+            margin="dense"
+            name="title"
+            label="Title"
+            fullWidth
+          />
+          <TextField
+            value={artist}
+            margin="dense"
+            name="artist"
+            label="Artist"
+            fullWidth
+          />
           <TextField
             margin="dense"
             name="thumbnail"
             label="Thumbnail"
             fullWidth
+            value={thumbnail}
           />
         </DialogContent>
         <DialogActions>
