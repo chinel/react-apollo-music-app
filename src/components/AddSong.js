@@ -38,6 +38,12 @@ function AddSong() {
   const [playable, setPlayable] = useState(false);
   const classes = useStyles();
   const [dialog, setDialog] = useState(false);
+  const [song, setSong] = React.useState({
+    duration: 0,
+    title: "",
+    artist: "",
+    thumbnail: "",
+  });
 
   React.useEffect(() => {
     const isPlayable =
@@ -57,7 +63,8 @@ function AddSong() {
     } else if (nestedPlayer.getCurrentSound) {
       songData = await getSoundCloudInfo(nestedPlayer);
     }
-    
+
+    setSong({ ...song, url });
   }
 
   function getYoutubeInfo(player) {
