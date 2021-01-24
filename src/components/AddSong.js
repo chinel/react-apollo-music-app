@@ -64,7 +64,7 @@ function AddSong() {
       songData = await getSoundCloudInfo(nestedPlayer);
     }
 
-    setSong({ ...song, url });
+    setSong({ ...songData, url });
   }
 
   function getYoutubeInfo(player) {

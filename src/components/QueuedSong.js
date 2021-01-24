@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Avatar,
-  IconButton,
-  Typography,
-  makeStyles,
-  useMediaQuery,
-} from "@material-ui/core";
+import { Avatar, IconButton, Typography, makeStyles } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 
 const useStyles = makeStyles({
