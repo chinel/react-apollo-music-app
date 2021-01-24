@@ -49,12 +49,15 @@ function AddSong() {
     setDialog(false);
   }
 
-  function handleEditSong({ player }) {
+  async function handleEditSong({ player }) {
     const nestedPlayer = player.player.player;
     let songData;
     if (nestedPlayer.getVideoData) {
       songData = getYoutubeInfo(nestedPlayer);
+    } else if (nestedPlayer.getCurrentSound) {
+      songData = await getSoundCloudInfo(nestedPlayer);
     }
+    
   }
 
   function getYoutubeInfo(player) {
@@ -62,6 +65,21 @@ function AddSong() {
     const { title, video_id, author } = player.getVideoData();
     const thumbnail = `https://img.youtube.com/vi/${video_id}/0.jpg`;
     return { duration, title, artist: author, thumbnail };
+  }
+
+  function getSoundCloudInfo(player) {
+    return new Promise((resolve) => {
+      player.getCurrentSound((songData) => {
+        if (songData) {
+          resolve({
+            duration: Number(songData.duration / 1000),
+            title: songData.title,
+            artist: songData.user.username,
+            thumbnail: songData.artwork_url.replace("-large", "-t500x500"),
+          });
+        }
+      });
+    });
   }
 
   return (
