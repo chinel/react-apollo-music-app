@@ -6,7 +6,7 @@ import theme from "./theme";
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
-    <CssBaseline/>
+    <CssBaseline />
     <React.StrictMode>
       <App />
     </React.StrictMode>
