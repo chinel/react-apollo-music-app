@@ -51,7 +51,14 @@ function AddSong() {
     setPlayable(isPlayable);
   }, [url]);
 
-  function handleChangeSong() {}
+  function handleChangeSong(event) {
+    const { name, value } = event;
+
+    setSong((prevSong) => ({
+      ...prevSong,
+      [name]: value,
+    }));
+  }
 
   function handleCloseDialog() {
     setDialog(false);
