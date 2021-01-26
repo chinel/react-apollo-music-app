@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const ADD_SONG = gql`
-  mutation addSongs(
+  mutation addSong(
     $title: String!
     $artist: String!
     $thumbnail: String!

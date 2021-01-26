@@ -1,11 +1,11 @@
 import React from "react";
 import { CircularProgress } from "@material-ui/core";
 import { Song } from ".";
-import { useQuery } from "@apollo/client";
-import { GET_SONGS } from "../graphql/queries";
+import { useSubscription } from "@apollo/client";
+import { GET_SONGS } from "../graphql/subscriptions";
 
 function SongList() {
-  const { data, loading, error } = useQuery(GET_SONGS);
+  const { data, loading, error } = useSubscription(GET_SONGS);
 
   /*  const song = {
     title: "First Song",
