@@ -35,18 +35,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const DEFAULT_SONG = {
+  duration: 0,
+  title: "",
+  artist: "",
+  thumbnail: "",
+};
+
 function AddSong() {
   const [url, setUrl] = useState("");
   const [playable, setPlayable] = useState(false);
   const classes = useStyles();
   const [dialog, setDialog] = useState(false);
-  const [addSong] = useMutation(ADD_SONG);
-  const [song, setSong] = React.useState({
-    duration: 0,
-    title: "",
-    artist: "",
-    thumbnail: "",
-  });
+  const [addSong, { error }] = useMutation(ADD_SONG);
+  const [song, setSong] = React.useState(DEFAULT_SONG);
 
   React.useEffect(() => {
     const isPlayable =
@@ -113,12 +115,16 @@ function AddSong() {
         title: title.length > 0 ? title : null,
         artist: artist.length > 0 ? artist : null,
       });
+      handleCloseDialog();
+      setSong(DEFAULT_SONG);
+      setUrl("");
     } catch (error) {
       console.error("Error adding song", error);
     }
   }
 
   const { thumbnail, title, artist } = song;
+
   return (
     <div className={classes.container}>
       <Dialog
@@ -163,7 +169,7 @@ function AddSong() {
           <Button onClick={handleCloseDialog} color="secondary">
             Cancel
           </Button>
-          <Button variant="outlined" color="primary">
+          <Button variant="outlined" color="primary" onClick={handleAddSong}>
             Add Song
           </Button>
         </DialogActions>
@@ -191,7 +197,6 @@ function AddSong() {
         variant="contained"
         color="primary"
         endIcon={<AddBoxOutlined />}
-        onClick={handleAddSong}
       >
         Add
       </Button>
