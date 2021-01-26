@@ -13,6 +13,8 @@ import { AddBoxOutlined, Link } from "@material-ui/icons";
 import SoundCloudPlayer from "react-player/soundcloud";
 import YouTubePlayer from "react-player/youtube";
 import ReactPlayer from "react-player";
+import { useMutation } from "@apollo/client";
+import { ADD_SONG } from "../graphql/mutation";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -38,6 +40,7 @@ function AddSong() {
   const [playable, setPlayable] = useState(false);
   const classes = useStyles();
   const [dialog, setDialog] = useState(false);
+  const [addSong] = useMutation(ADD_SONG);
   const [song, setSong] = React.useState({
     duration: 0,
     title: "",
@@ -97,6 +100,8 @@ function AddSong() {
       });
     });
   }
+
+  function handleAddSong() {}
 
   const { thumbnail, title, artist } = song;
   return (
@@ -171,6 +176,7 @@ function AddSong() {
         variant="contained"
         color="primary"
         endIcon={<AddBoxOutlined />}
+        onClick={handleAddSong}
       >
         Add
       </Button>

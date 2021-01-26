@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const ADD_SONG = gql`
+export const ADD_SONG = gql`
   mutation addSongs(
     $title: String!
     $artist: String!
