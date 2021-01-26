@@ -101,7 +101,22 @@ function AddSong() {
     });
   }
 
-  function handleAddSong() {}
+  async function handleAddSong() {
+    try {
+      const { url, thumbnail, duration, title, artist } = song;
+
+      //this addSong returns a promise so we can use async await for this
+      await addSong({
+        url: url.length > 0 ? url : null,
+        thumbnail: thumbnail.length > 0 ? thumbnail : null,
+        duration: duration > 0 ? duration : null,
+        title: title.length > 0 ? title : null,
+        artist: artist.length > 0 ? artist : null,
+      });
+    } catch (error) {
+      console.error("Error adding song", error);
+    }
+  }
 
   const { thumbnail, title, artist } = song;
   return (
