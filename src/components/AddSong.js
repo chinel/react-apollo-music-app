@@ -13,6 +13,8 @@ import { AddBoxOutlined, Link } from "@material-ui/icons";
 import SoundCloudPlayer from "react-player/soundcloud";
 import YouTubePlayer from "react-player/youtube";
 import ReactPlayer from "react-player";
+import { useMutation } from "@apollo/client";
+import { ADD_SONG } from "../graphql/mutation";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -33,17 +35,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const DEFAULT_SONG = {
+  duration: 0,
+  title: "",
+  artist: "",
+  thumbnail: "",
+};
+
 function AddSong() {
   const [url, setUrl] = useState("");
   const [playable, setPlayable] = useState(false);
   const classes = useStyles();
   const [dialog, setDialog] = useState(false);
-  const [song, setSong] = React.useState({
-    duration: 0,
-    title: "",
-    artist: "",
-    thumbnail: "",
-  });
+  const [addSong, { error }] = useMutation(ADD_SONG);
+  const [song, setSong] = React.useState(DEFAULT_SONG);
 
   React.useEffect(() => {
     const isPlayable =
@@ -98,7 +103,32 @@ function AddSong() {
     });
   }
 
+  async function handleAddSong() {
+    try {
+      const { url, thumbnail, duration, title, artist } = song;
+
+      //this addSong returns a promise so we can use async await for this
+      await addSong({
+        url: url.length > 0 ? url : null,
+        thumbnail: thumbnail.length > 0 ? thumbnail : null,
+        duration: duration > 0 ? duration : null,
+        title: title.length > 0 ? title : null,
+        artist: artist.length > 0 ? artist : null,
+      });
+      handleCloseDialog();
+      setSong(DEFAULT_SONG);
+      setUrl("");
+    } catch (error) {
+      console.error("Error adding song", error);
+    }
+  }
+
+  function handleError(field) {
+    return error && error.graphQLErrors[0].extensions.path.includes(field);
+  }
+
   const { thumbnail, title, artist } = song;
+
   return (
     <div className={classes.container}>
       <Dialog
@@ -121,6 +151,8 @@ function AddSong() {
             label="Title"
             fullWidth
             onChange={handleChangeSong}
+            error={handleError("title")}
+            helperText={handleError("title") && "Fill out field"}
           />
           <TextField
             value={artist}
@@ -129,6 +161,8 @@ function AddSong() {
             label="Artist"
             fullWidth
             onChange={handleChangeSong}
+            error={handleError("artist")}
+            helperText={handleError("artist") && "Fill out field"}
           />
           <TextField
             margin="dense"
@@ -137,13 +171,15 @@ function AddSong() {
             fullWidth
             value={thumbnail}
             onChange={handleChangeSong}
+            error={handleError("thumbnail")}
+            helperText={handleError("thumbnail") && "Fill out field"}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="secondary">
             Cancel
           </Button>
-          <Button variant="outlined" color="primary">
+          <Button variant="outlined" color="primary" onClick={handleAddSong}>
             Add Song
           </Button>
         </DialogActions>
