@@ -57,8 +57,8 @@ function AddSong() {
   }, [url]);
 
   function handleChangeSong(event) {
-    const { name, value } = event;
-
+    console.log(event);
+    const { name, value } = event.target;
     setSong((prevSong) => ({
       ...prevSong,
       [name]: value,
@@ -109,11 +109,13 @@ function AddSong() {
 
       //this addSong returns a promise so we can use async await for this
       await addSong({
-        url: url.length > 0 ? url : null,
-        thumbnail: thumbnail.length > 0 ? thumbnail : null,
-        duration: duration > 0 ? duration : null,
-        title: title.length > 0 ? title : null,
-        artist: artist.length > 0 ? artist : null,
+        variables: {
+          title: title.length > 0 ? title : null,
+          artist: artist.length > 0 ? artist : null,
+          thumbnail: thumbnail.length > 0 ? thumbnail : null,
+          duration: duration > 0 ? duration : null,
+          url: url.length > 0 ? url : null,
+        },
       });
       handleCloseDialog();
       setSong(DEFAULT_SONG);
@@ -150,7 +152,7 @@ function AddSong() {
             name="title"
             label="Title"
             fullWidth
-            onChange={handleChangeSong}
+            onChange={(event) => handleChangeSong(event)}
             error={handleError("title")}
             helperText={handleError("title") && "Fill out field"}
           />
@@ -160,7 +162,7 @@ function AddSong() {
             name="artist"
             label="Artist"
             fullWidth
-            onChange={handleChangeSong}
+            onChange={(event) => handleChangeSong(event)}
             error={handleError("artist")}
             helperText={handleError("artist") && "Fill out field"}
           />
@@ -170,7 +172,7 @@ function AddSong() {
             label="Thumbnail"
             fullWidth
             value={thumbnail}
-            onChange={handleChangeSong}
+            onChange={(event) => handleChangeSong(event)}
             error={handleError("thumbnail")}
             helperText={handleError("thumbnail") && "Fill out field"}
           />
