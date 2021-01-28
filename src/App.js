@@ -2,12 +2,14 @@ import React from "react";
 import { AddSong, Header, SongList, SongPlayer } from "./components";
 import { Grid, useMediaQuery, Hidden } from "@material-ui/core";
 
-React.createContext({
+export const songContext = React.createContext({
   song: {
-    id: "",
-    title: "",
-    artist: "",
-    thumbnail: "",
+    id: "1dcd44ea-1510-4cdf-baa3-155f58dad6c2",
+    title: "Holy legendado",
+    artist: "Donnie Mcclurkin",
+    thumbnail: "https://img.youtube.com/vi/JLwLBdnuvvc/0.jpg",
+    url: "https://www.youtube.com/watch?v=JLwLBdnuvvc",
+    duration: 633,
   },
   isPlaying: false,
 });
