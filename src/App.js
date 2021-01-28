@@ -2,6 +2,16 @@ import React from "react";
 import { AddSong, Header, SongList, SongPlayer } from "./components";
 import { Grid, useMediaQuery, Hidden } from "@material-ui/core";
 
+React.createContext({
+  song: {
+    id: "",
+    title: "",
+    artist: "",
+    thumbnail: "",
+  },
+  isPlaying: false,
+});
+
 function App() {
   // const matches = useMediaQuery("(min-width: 600px)"); this can also be done as shown below using the theme
   const greaterThanSm = useMediaQuery((theme) => theme.breakpoints.up("sm"));
