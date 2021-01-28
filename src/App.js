@@ -22,7 +22,7 @@ function App() {
   const greaterThanMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
   return (
-    <>
+    <SongContext.Provider value={{ state, dispatch }}>
       {/*greaterThanSm && <Header /> on way of hiding an element*/}
 
       {/**A more declarative approach*/}
@@ -57,7 +57,7 @@ function App() {
           <SongPlayer />
         </Grid>
       </Grid>
-    </>
+    </SongContext.Provider>
   );
 }
 
