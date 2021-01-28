@@ -9,7 +9,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import QueuedSongList from "./QueuedSongList";
-import { PlayArrow, SkipNext, SkipPrevious } from "@material-ui/icons";
+import { Pause, PlayArrow, SkipNext, SkipPrevious } from "@material-ui/icons";
 import { SongContext } from "../App";
 
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +65,7 @@ function SongPlayer() {
               <SkipPrevious />
             </IconButton>
             <IconButton onClick={handleTogglePlay}>
-              <PlayArrow className={classes.playIcon} />
+             { state.isPlaying ? <Pause className={classes.playIcon}/>: <PlayArrow className={classes.playIcon} />}
             </IconButton>
             <IconButton>
               <SkipNext />
