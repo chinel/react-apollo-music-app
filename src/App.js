@@ -1,14 +1,29 @@
 import React from "react";
 import { AddSong, Header, SongList, SongPlayer } from "./components";
 import { Grid, useMediaQuery, Hidden } from "@material-ui/core";
+import songReducer from "./reducer";
+
+export const SongContext = React.createContext({
+  song: {
+    id: "1dcd44ea-1510-4cdf-baa3-155f58dad6c2",
+    title: "Holy legendado",
+    artist: "Donnie Mcclurkin",
+    thumbnail: "https://img.youtube.com/vi/JLwLBdnuvvc/0.jpg",
+    url: "https://www.youtube.com/watch?v=JLwLBdnuvvc",
+    duration: 633,
+  },
+  isPlaying: false,
+});
 
 function App() {
+  const initialSongState = React.useContext(SongContext);
+  const [state, dispatch] = React.useReducer(songReducer, initialSongState);
   // const matches = useMediaQuery("(min-width: 600px)"); this can also be done as shown below using the theme
   const greaterThanSm = useMediaQuery((theme) => theme.breakpoints.up("sm"));
   const greaterThanMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
   return (
-    <>
+    <SongContext.Provider value={{ state, dispatch }}>
       {/*greaterThanSm && <Header /> on way of hiding an element*/}
 
       {/**A more declarative approach*/}
@@ -43,7 +58,7 @@ function App() {
           <SongPlayer />
         </Grid>
       </Grid>
-    </>
+    </SongContext.Provider>
   );
 }
 
