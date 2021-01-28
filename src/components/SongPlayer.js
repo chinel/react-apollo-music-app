@@ -41,8 +41,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SongPlayer() {
-  const { state } = React.useContext(SongContext);
+  const { state, dispatch } = React.useContext(SongContext);
   const classes = useStyles();
+
+  function handleTogglePlay() {
+    dispatch({ type: "PLAY_SONG" });
+  }
+
   return (
     <>
       <Card variant="outlined" className={classes.container}>
@@ -59,7 +64,7 @@ function SongPlayer() {
             <IconButton>
               <SkipPrevious />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={handleTogglePlay}>
               <PlayArrow className={classes.playIcon} />
             </IconButton>
             <IconButton>
