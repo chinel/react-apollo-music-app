@@ -1,8 +1,11 @@
 function songReducer(state, action) {
   switch (action.type) {
-    case "value":
-      break;
-
+    case "PLAY_SONG": {
+      return {
+        ...state,
+        isPlaying: true,
+      };
+    }
     default:
       break;
   }
