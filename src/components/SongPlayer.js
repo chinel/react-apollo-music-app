@@ -44,6 +44,7 @@ function SongPlayer() {
   const { state, dispatch } = React.useContext(SongContext);
   const classes = useStyles();
 
+  //conditionally dispatch an action type based on the state
   function handleTogglePlay() {
     dispatch(state.isPlaying ? { type: "PAUSE_SONG" } : { type: "PLAY_SONG" });
   }
