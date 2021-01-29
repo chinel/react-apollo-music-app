@@ -32,15 +32,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Song({ song: { thumbnail, title, artist, id } }) {
+export default function Song({ song }) {
+  const { thumbnail, title, artist, id } = song;
   const classes = useStyles();
-  const { state } = useContext(SongContext);
+  const { state, dispatch } = useContext(SongContext);
   const [currentSongPlaying, setCurrentSongPlaying] = useState(false);
 
   useEffect(() => {
     const isSongPlaying = state.isPlaying && id === state.song.id;
     setCurrentSongPlaying(isSongPlaying);
   }, [id, state.song.id, state.isPlaying]);
+
+  //conditionally dispatch an action type based on the state
+  function handleTogglePlay() {
+    dispatch({ type: "SET_SONG", payload: { song } });
+    dispatch(state.isPlaying ? { type: "PAUSE_SONG" } : { type: "PLAY_SONG" });
+  }
 
   return (
     <Card className={classes.container}>
@@ -56,7 +63,7 @@ export default function Song({ song: { thumbnail, title, artist, id } }) {
             </Typography>
           </CardContent>
           <CardActions>
-            <IconButton size="small" color="primary">
+            <IconButton size="small" color="primary" onClick={handleTogglePlay}>
               {currentSongPlaying ? <Pause /> : <PlayArrow />}
             </IconButton>
             <IconButton size="small" color="secondary">
