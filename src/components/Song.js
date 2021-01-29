@@ -8,7 +8,7 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import { PlayArrow, Save } from "@material-ui/icons";
+import { Pause, PlayArrow, Save } from "@material-ui/icons";
 import { SongContext } from "../App";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +50,7 @@ export default function Song({ song: { thumbnail, title, artist } }) {
           </CardContent>
           <CardActions>
             <IconButton size="small" color="primary">
-              <PlayArrow />
+              {state.isPlaying ? <Pause /> : <PlayArrow />}
             </IconButton>
             <IconButton size="small" color="secondary">
               <Save />
