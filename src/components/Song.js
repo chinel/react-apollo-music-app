@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Card,
   CardActions,
@@ -9,6 +9,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { PlayArrow, Save } from "@material-ui/icons";
+import { SongContext } from "../App";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Song({ song: { thumbnail, title, artist } }) {
   const classes = useStyles();
+  const { state } = useContext(SongContext);
   return (
     <Card className={classes.container}>
       <div className={classes.songInfoContainer}>
