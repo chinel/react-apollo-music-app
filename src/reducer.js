@@ -12,6 +12,12 @@ function songReducer(state, action) {
         isPlaying: false,
       };
     }
+    case "SET_SONG": {
+      return {
+        ...state,
+        song: action.payload.song,
+      };
+    }
     default:
       break;
   }
