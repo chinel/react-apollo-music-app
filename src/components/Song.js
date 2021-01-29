@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Card,
   CardActions,
@@ -32,9 +32,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Song({ song: { thumbnail, title, artist } }) {
+export default function Song({ song: { thumbnail, title, artist, id } }) {
   const classes = useStyles();
   const { state } = useContext(SongContext);
+  const [currentSongPlaying, setCurrentSongPlaying] = useState(false);
+
+  useEffect(() => {
+    const isSongPlaying = state.isPlaying && id === state.song.id;
+    setCurrentSongPlaying(isSongPlaying);
+  }, [id, state.song.id, state.isPlaying]);
+
   return (
     <Card className={classes.container}>
       <div className={classes.songInfoContainer}>
@@ -50,7 +57,7 @@ export default function Song({ song: { thumbnail, title, artist } }) {
           </CardContent>
           <CardActions>
             <IconButton size="small" color="primary">
-              {state.isPlaying ? <Pause /> : <PlayArrow />}
+              {currentSongPlaying ? <Pause /> : <PlayArrow />}
             </IconButton>
             <IconButton size="small" color="secondary">
               <Save />
