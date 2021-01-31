@@ -6,12 +6,12 @@ function QueuedSongList({ queue }) {
   console.log(queue);
   const greaterThanMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
-  const song = {
+  /* const song = {
     title: "First Song",
     artist: "Manny",
     thumbnail:
       "https://i1.sndcdn.com/artworks-000670470790-ej1gvb-t500x500.jpg",
-  };
+  }; */
   return (
     greaterThanMd && (
       <div
@@ -20,9 +20,9 @@ function QueuedSongList({ queue }) {
         }}
       >
         <Typography color="textSecondary" variant="button">
-          QUEUE (5)
+          QUEUE ({queue.length})
         </Typography>
-        {Array.from({ length: 5 }, () => song).map((song, i) => (
+        {queue.map((song, i) => (
           <QueuedSong key={i} song={song} />
         ))}
       </div>
