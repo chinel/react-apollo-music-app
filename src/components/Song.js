@@ -73,7 +73,11 @@ export default function Song({ song }) {
             <IconButton size="small" color="primary" onClick={handleTogglePlay}>
               {currentSongPlaying ? <Pause /> : <PlayArrow />}
             </IconButton>
-            <IconButton size="small" color="secondary">
+            <IconButton
+              size="small"
+              color="secondary"
+              onClick={handleAddOrRemoveFromQueue}
+            >
               <Save />
             </IconButton>
           </CardActions>
