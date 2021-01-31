@@ -43,32 +43,38 @@ const client = new ApolloClient({
   link,
   cache: new InMemoryCache(),
   typeDefs: gql`
-  type Song{
-    id: uuid!,
-    title: String!,
-    artist: String!,
-    thumbnail: String!,
-    duration: Float!,
-    url: String!,
-  }
+    type Song {
+      id: uuid!
+      title: String!
+      artist: String!
+      thumbnail: String!
+      duration: Float!
+      url: String!
+    }
 
-  input SongInput{
-    id: uuid!,
-    title: String!,
-    artist: String!,
-    thumbnail: String!,
-    duration: Float!,
-    url: String!,
-  }
+    input SongInput {
+      id: uuid!
+      title: String!
+      artist: String!
+      thumbnail: String!
+      duration: Float!
+      url: String!
+    }
 
-  type Query{
-    queue: [Song]!
-  }
+    type Query {
+      queue: [Song]!
+    }
 
-  type Mutation {
-    addOrRemoveFromQueue(input: SongInput!): [Song]!
-  }
+    type Mutation {
+      addOrRemoveFromQueue(input: SongInput!): [Song]!
+    }
   `,
 });
+
+const data = {
+  queue: [],
+};
+
+client.writeData({ data });
 
 export default client;
