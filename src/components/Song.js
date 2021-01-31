@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     width: 140,
     height: 140,
   },
+  title: {
+    textTransform: "capitalize",
+  },
 }));
 
 export default function Song({ song }) {
@@ -53,7 +56,6 @@ export default function Song({ song }) {
   }
 
   function handleAddOrRemoveFromQueue() {
-    console.log("song", song);
     addOrRemoveFromQueue({
       variables: { input: { ...song, __typename: "Song" } },
     });
@@ -65,7 +67,12 @@ export default function Song({ song }) {
         <CardMedia image={thumbnail} className={classes.thumbnail} />
         <div className={classes.songInfo}>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="h2"
+              className={classes.title}
+            >
               {title}
             </Typography>
             <Typography variant="body1" component="p" color="textSecondary">
