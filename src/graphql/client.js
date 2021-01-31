@@ -95,8 +95,10 @@ const client = new ApolloClient({
   },
 });
 
+const hasQueue = Boolean(localStorage.getItem("queue")); // if there is an item in the local storage when it is converted to a boolean it will return true
+
 const data = {
-  queue: [],
+  queue: hasQueue ? JSON.parse(localStorage.getItem("queue")) : [],
 };
 
 client.writeData({ data });
