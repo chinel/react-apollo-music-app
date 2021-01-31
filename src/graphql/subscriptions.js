@@ -8,6 +8,7 @@ export const GET_SONGS = gql`
       id
       duration
       artist
+      title
     }
   }
 `;

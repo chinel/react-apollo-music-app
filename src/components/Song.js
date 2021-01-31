@@ -32,13 +32,20 @@ const useStyles = makeStyles((theme) => ({
     width: 140,
     height: 140,
   },
+  title: {
+    textTransform: "capitalize",
+  },
 }));
 
 export default function Song({ song }) {
   const { thumbnail, title, artist, id } = song;
   const classes = useStyles();
   const { state, dispatch } = useContext(SongContext);
-  const [addOrRemoveFromQueue] = useMutation(ADD_OR_REMOVE_FROM_QUEUE);
+  const [addOrRemoveFromQueue] = useMutation(ADD_OR_REMOVE_FROM_QUEUE, {
+    onCompleted: (data) => {
+      localStorage.setItem("queue", JSON.stringify(data.addOrRemoveFromQueue));
+    },
+  });
   const [currentSongPlaying, setCurrentSongPlaying] = useState(false);
 
   useEffect(() => {
@@ -54,7 +61,7 @@ export default function Song({ song }) {
 
   function handleAddOrRemoveFromQueue() {
     addOrRemoveFromQueue({
-      variable: { input: { ...song, __typename: "Song" } },
+      variables: { input: { ...song, __typename: "Song" } },
     });
   }
 
@@ -64,7 +71,12 @@ export default function Song({ song }) {
         <CardMedia image={thumbnail} className={classes.thumbnail} />
         <div className={classes.songInfo}>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="h2"
+              className={classes.title}
+            >
               {title}
             </Typography>
             <Typography variant="body1" component="p" color="textSecondary">

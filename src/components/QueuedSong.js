@@ -1,6 +1,8 @@
 import React from "react";
 import { Avatar, IconButton, Typography, makeStyles } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
+import { useMutation } from "@apollo/client";
+import { ADD_OR_REMOVE_FROM_QUEUE } from "../graphql/mutation";
 
 const useStyles = makeStyles({
   avatar: {
@@ -25,8 +27,21 @@ const useStyles = makeStyles({
   },
 });
 
-function QueuedSong({ song: { thumbnail, artist, title } }) {
+function QueuedSong({ song }) {
+  const { thumbnail, artist, title } = song;
   const classes = useStyles();
+  const [addOrRemoveFromQueue] = useMutation(ADD_OR_REMOVE_FROM_QUEUE, {
+    onCompleted: (data) => {
+      localStorage.setItem("queue", JSON.stringify(data.addOrRemoveFromQueue));
+    },  
+  });
+
+  function handleAddOrRemoveFromQueue() {
+    addOrRemoveFromQueue({
+      variables: { input: { ...song, __typename: "Song" } },
+    });
+  }
+
   return (
     <div className={classes.container}>
       <Avatar
@@ -46,7 +61,7 @@ function QueuedSong({ song: { thumbnail, artist, title } }) {
           {artist}
         </Typography>
       </div>
-      <IconButton>
+      <IconButton onClick={handleAddOrRemoveFromQueue}>
         <Delete color="error" />
       </IconButton>
     </div>

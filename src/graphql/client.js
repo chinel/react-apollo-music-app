@@ -15,6 +15,7 @@ import { HttpLink } from "apollo-link-http";
 import { split } from "apollo-link";
 import { getMainDefinition } from "apollo-utilities";
 import { gql } from "@apollo/client";
+import { GET_QUEUED_SONGS } from "./queries";
 
 const httpLink = new HttpLink({
   uri: "https://react-apollo-music.herokuapp.com/v1/graphql", // use https for secure endpoint
@@ -69,10 +70,35 @@ const client = new ApolloClient({
       addOrRemoveFromQueue(input: SongInput!): [Song]!
     }
   `,
+  resolvers: {
+    Mutation: {
+      addOrRemoveFromQueue: (_, { input }, { cache }) => {
+        const queryResult = cache.readQuery({
+          query: GET_QUEUED_SONGS,
+        });
+        if (queryResult) {
+          const { queue } = queryResult;
+          const isInQueue = queue.some((song) => song.id === input.id);
+          const newQueue = isInQueue
+            ? queue.filter((song) => song.id !== input.id)
+            : [...queue, input];
+          cache.writeQuery({
+            query: GET_QUEUED_SONGS,
+            data: { queue: newQueue },
+          });
+
+          return newQueue;
+        }
+        return [];
+      },
+    },
+  },
 });
 
+const hasQueue = Boolean(localStorage.getItem("queue")); // if there is an item in the local storage when it is converted to a boolean it will return true
+
 const data = {
-  queue: [],
+  queue: hasQueue ? JSON.parse(localStorage.getItem("queue")) : [],
 };
 
 client.writeData({ data });
