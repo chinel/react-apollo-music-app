@@ -2,7 +2,8 @@ import React from "react";
 import { Typography, useMediaQuery } from "@material-ui/core";
 import QueuedSong from "./QueuedSong";
 
-function QueuedSongList() {
+function QueuedSongList({ queue }) {
+  console.log(queue);
   const greaterThanMd = useMediaQuery((theme) => theme.breakpoints.up("md"));
 
   const song = {

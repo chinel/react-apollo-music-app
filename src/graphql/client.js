@@ -14,6 +14,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
 import { split } from "apollo-link";
 import { getMainDefinition } from "apollo-utilities";
+import { gql } from "@apollo/client";
 
 const httpLink = new HttpLink({
   uri: "https://react-apollo-music.herokuapp.com/v1/graphql", // use https for secure endpoint
@@ -41,6 +42,39 @@ const link = split(
 const client = new ApolloClient({
   link,
   cache: new InMemoryCache(),
+  typeDefs: gql`
+    type Song {
+      id: uuid!
+      title: String!
+      artist: String!
+      thumbnail: String!
+      duration: Float!
+      url: String!
+    }
+
+    input SongInput {
+      id: uuid!
+      title: String!
+      artist: String!
+      thumbnail: String!
+      duration: Float!
+      url: String!
+    }
+
+    type Query {
+      queue: [Song]!
+    }
+
+    type Mutation {
+      addOrRemoveFromQueue(input: SongInput!): [Song]!
+    }
+  `,
 });
+
+const data = {
+  queue: [],
+};
+
+client.writeData({ data });
 
 export default client;

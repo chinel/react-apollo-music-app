@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core";
 import { Pause, PlayArrow, Save } from "@material-ui/icons";
 import { SongContext } from "../App";
+import { ADD_OR_REMOVE_FROM_QUEUE } from "../graphql/mutation";
+import { useMutation } from "@apollo/client";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -36,6 +38,7 @@ export default function Song({ song }) {
   const { thumbnail, title, artist, id } = song;
   const classes = useStyles();
   const { state, dispatch } = useContext(SongContext);
+  const [addOrRemoveFromQueue] = useMutation(ADD_OR_REMOVE_FROM_QUEUE);
   const [currentSongPlaying, setCurrentSongPlaying] = useState(false);
 
   useEffect(() => {
@@ -47,6 +50,12 @@ export default function Song({ song }) {
   function handleTogglePlay() {
     dispatch({ type: "SET_SONG", payload: { song } });
     dispatch(state.isPlaying ? { type: "PAUSE_SONG" } : { type: "PLAY_SONG" });
+  }
+
+  function handleAddOrRemoveFromQueue() {
+    addOrRemoveFromQueue({
+      variable: { input: { ...song, __typename: "Song" } },
+    });
   }
 
   return (
@@ -66,7 +75,11 @@ export default function Song({ song }) {
             <IconButton size="small" color="primary" onClick={handleTogglePlay}>
               {currentSongPlaying ? <Pause /> : <PlayArrow />}
             </IconButton>
-            <IconButton size="small" color="secondary">
+            <IconButton
+              size="small"
+              color="secondary"
+              onClick={handleAddOrRemoveFromQueue}
+            >
               <Save />
             </IconButton>
           </CardActions>
