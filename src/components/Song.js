@@ -53,8 +53,9 @@ export default function Song({ song }) {
   }
 
   function handleAddOrRemoveFromQueue() {
+    console.log("song", song);
     addOrRemoveFromQueue({
-      variable: { input: { ...song, __typename: "Song" } },
+      variables: { input: { ...song, __typename: "Song" } },
     });
   }
 
