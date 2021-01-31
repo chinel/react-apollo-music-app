@@ -41,7 +41,11 @@ export default function Song({ song }) {
   const { thumbnail, title, artist, id } = song;
   const classes = useStyles();
   const { state, dispatch } = useContext(SongContext);
-  const [addOrRemoveFromQueue] = useMutation(ADD_OR_REMOVE_FROM_QUEUE);
+  const [addOrRemoveFromQueue] = useMutation(ADD_OR_REMOVE_FROM_QUEUE, {
+    onCompleted: (data) => {
+      localStorage.setItem("queue", JSON.stringify(data.addOrRemoveFromQueue));
+    },
+  });
   const [currentSongPlaying, setCurrentSongPlaying] = useState(false);
 
   useEffect(() => {

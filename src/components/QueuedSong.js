@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-function QueuedSong(song) {
+function QueuedSong({ song }) {
   const { thumbnail, artist, title } = song;
   const classes = useStyles();
   const [addOrRemoveFromQueue] = useMutation(ADD_OR_REMOVE_FROM_QUEUE);
