@@ -50,6 +50,7 @@ function SongPlayer() {
   const [played, setPlayed] = React.useState(0);
   const [playedSeconds, setPlayedSeconds] = React.useState(0);
   const [seeking, setSeeking] = React.useState(false);
+  const [positionInQueue, setPositionInQueue] = React.useState(0);
   const classes = useStyles();
 
   React.useEffect(() => {
