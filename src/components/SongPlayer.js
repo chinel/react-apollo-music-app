@@ -54,6 +54,10 @@ function SongPlayer() {
     dispatch(state.isPlaying ? { type: "PAUSE_SONG" } : { type: "PLAY_SONG" });
   }
 
+  function handleProgressChange(event, newValue) {
+    setPlayed(newValue);
+  }
+
   return (
     <>
       <Card variant="outlined" className={classes.container}>
@@ -85,7 +89,7 @@ function SongPlayer() {
             </Typography>
           </div>
           <Slider
-            onChange={handleSliderChange}
+            onChange={handleProgressChange}
             value={played}
             type="range"
             min={0}
