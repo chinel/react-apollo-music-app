@@ -48,6 +48,7 @@ function SongPlayer() {
   const reactPlayerRef = React.useRef();
   const { state, dispatch } = React.useContext(SongContext);
   const [played, setPlayed] = React.useState(0);
+  const [playedSeconds, setPlayedSeconds] = React.useState(0);
   const [seeking, setSeeking] = React.useState(false);
   const classes = useStyles();
 
@@ -66,7 +67,7 @@ function SongPlayer() {
 
   function handleSeekMouseUp() {
     setSeeking(false);
-    reactPlayerRef.current.seekTo(played); 
+    reactPlayerRef.current.seekTo(played);
   }
 
   return (
@@ -115,6 +116,7 @@ function SongPlayer() {
           onProgress={({ played, playedSongs }) => {
             if (!seeking) {
               setPlayed(played);
+              setPlayedSeconds(playedSeconds);
             }
           }}
           url={state.song.url}
