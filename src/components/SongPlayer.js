@@ -59,6 +59,10 @@ function SongPlayer() {
     setPlayed(newValue);
   }
 
+  function handleSeekMouseMove() {
+    setSeeking(true);
+  }
+
   return (
     <>
       <Card variant="outlined" className={classes.container}>
