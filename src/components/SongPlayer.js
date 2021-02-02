@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SongPlayer() {
   const { data, loading, error } = useQuery(GET_QUEUED_SONGS);
+  const reactPlayerRef = React.useRef();
   const { state, dispatch } = React.useContext(SongContext);
   const [played, setPlayed] = React.useState(0);
   const [seeking, setSeeking] = React.useState(false);
@@ -62,7 +63,10 @@ function SongPlayer() {
   function handleSeekMouseMove() {
     setSeeking(true);
   }
-  
+
+  function handleSeekMouseUp() {
+    setSeeking(false);
+  }
 
   return (
     <>
@@ -106,6 +110,7 @@ function SongPlayer() {
           />
         </div>
         <ReactPlayer
+          ref={reactPlayerRef}
           onProgress={({ played, playedSongs }) => {
             setPlayed(played);
           }}
