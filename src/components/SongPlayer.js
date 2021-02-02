@@ -84,7 +84,14 @@ function SongPlayer() {
               00:01:30
             </Typography>
           </div>
-          <Slider value={played} type="range" min={0} max={1} step={0.01} />
+          <Slider
+            onChange={handleSliderChange}
+            value={played}
+            type="range"
+            min={0}
+            max={1}
+            step={0.01}
+          />
         </div>
         <ReactPlayer
           onProgress={({ played, playedSongs }) => {
