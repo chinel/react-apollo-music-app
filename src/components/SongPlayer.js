@@ -13,6 +13,7 @@ import { Pause, PlayArrow, SkipNext, SkipPrevious } from "@material-ui/icons";
 import { SongContext } from "../App";
 import { useQuery } from "@apollo/client";
 import { GET_QUEUED_SONGS } from "../graphql/queries";
+import ReactPlayer from "react-player";
 
 const useStyles = makeStyles((theme) => ({
   container: {
