@@ -70,6 +70,10 @@ function SongPlayer() {
     reactPlayerRef.current.seekTo(played);
   }
 
+  function formatDuration(seconds) {
+    return new Date(seconds * 1000).toISOString().substr(11, 8);
+  }
+
   return (
     <>
       <Card variant="outlined" className={classes.container}>
