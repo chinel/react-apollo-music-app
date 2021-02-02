@@ -58,6 +58,14 @@ function SongPlayer() {
     setPositionInQueue(songIndex);
   }, [data.queue, state.song.id]);
 
+  React.useEffect(() => {
+    const nextSong = data.queue[positionInQueue + 1];
+    if (played === 1 && nextSong) {
+      setPlayed(0);
+      dispatch({ type: "SET_SONG", payload: { nextSong } });
+    }
+  }, [data.queue, dispatch, played, positionInQueue]);
+
   //conditionally dispatch an action type based on the state
   function handleTogglePlay() {
     dispatch(state.isPlaying ? { type: "PAUSE_SONG" } : { type: "PLAY_SONG" });
