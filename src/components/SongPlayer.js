@@ -117,7 +117,7 @@ function SongPlayer() {
         </div>
         <ReactPlayer
           ref={reactPlayerRef}
-          onProgress={({ played, playedSongs }) => {
+          onProgress={({ played, playedSeconds }) => {
             if (!seeking) {
               setPlayed(played);
               setPlayedSeconds(playedSeconds);
