@@ -60,12 +60,13 @@ function SongPlayer() {
     setPlayed(newValue);
   }
 
-  function handleSeekMouseMove() {
+  function handleSeekMouseDown() {
     setSeeking(true);
   }
 
   function handleSeekMouseUp() {
     setSeeking(false);
+    reactPlayerRef.current.seekTo(played); 
   }
 
   return (
@@ -99,7 +100,7 @@ function SongPlayer() {
             </Typography>
           </div>
           <Slider
-            onMouseDown={handleSeekMouseMove}
+            onMouseDown={handleSeekMouseDown}
             onMouseUp={handleSeekMouseUp}
             onChange={handleProgressChange}
             value={played}
@@ -112,7 +113,9 @@ function SongPlayer() {
         <ReactPlayer
           ref={reactPlayerRef}
           onProgress={({ played, playedSongs }) => {
-            setPlayed(played);
+            if (!seeking) {
+              setPlayed(played);
+            }
           }}
           url={state.song.url}
           playing={state.isPlaying}
