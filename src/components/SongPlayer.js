@@ -47,6 +47,7 @@ function SongPlayer() {
   const { data, loading, error } = useQuery(GET_QUEUED_SONGS);
   const { state, dispatch } = React.useContext(SongContext);
   const [played, setPlayed] = React.useState(0);
+  const [seeking, setSeeking] = React.useState(false);
   const classes = useStyles();
 
   //conditionally dispatch an action type based on the state
@@ -89,6 +90,7 @@ function SongPlayer() {
             </Typography>
           </div>
           <Slider
+            onMouseDown={handleSeekMouseMove}
             onChange={handleProgressChange}
             value={played}
             type="range"
