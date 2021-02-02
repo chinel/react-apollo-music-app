@@ -55,7 +55,8 @@ function SongPlayer() {
 
   React.useEffect(() => {
     const songIndex = data.queue.findIndex((song) => song.id === state.song.id);
-  }, [state.song.id]);
+    setPositionInQueue(songIndex);
+  }, [data.queue, state.song.id]);
 
   //conditionally dispatch an action type based on the state
   function handleTogglePlay() {
