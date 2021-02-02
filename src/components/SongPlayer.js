@@ -101,7 +101,7 @@ function SongPlayer() {
               <SkipNext />
             </IconButton>
             <Typography variant="subtitle1" component="p" color="textSecondary">
-              {playedSeconds}
+              {formatDuration(playedSeconds)}
             </Typography>
           </div>
           <Slider
