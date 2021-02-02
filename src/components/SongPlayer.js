@@ -62,6 +62,7 @@ function SongPlayer() {
   function handleSeekMouseMove() {
     setSeeking(true);
   }
+  
 
   return (
     <>
@@ -95,6 +96,7 @@ function SongPlayer() {
           </div>
           <Slider
             onMouseDown={handleSeekMouseMove}
+            onMouseUp={handleSeekMouseUp}
             onChange={handleProgressChange}
             value={played}
             type="range"
