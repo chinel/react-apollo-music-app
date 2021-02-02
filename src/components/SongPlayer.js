@@ -52,6 +52,10 @@ function SongPlayer() {
   const [seeking, setSeeking] = React.useState(false);
   const classes = useStyles();
 
+  React.useEffect(() => {
+    const songIndex = data.queue.findIndex((song) => song.id === state.song.id);
+  }, [state.song.id]);
+
   //conditionally dispatch an action type based on the state
   function handleTogglePlay() {
     dispatch(state.isPlaying ? { type: "PAUSE_SONG" } : { type: "PLAY_SONG" });
