@@ -87,7 +87,9 @@ function SongPlayer() {
           <Slider type="range" min={0} max={1} step={0.01} />
         </div>
         <ReactPlayer
-          onProgress={({ played, playedSongs }) => {}}
+          onProgress={({ played, playedSongs }) => {
+            setPlayed(played);
+          }}
           url={state.song.url}
           playing={state.isPlaying}
           hidden
