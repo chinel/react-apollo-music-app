@@ -1,6 +1,6 @@
 # React Music Player App
 
-### [Live Site](https://quirky-spence-84429b.netlify.app)
+### [Live Site](https://react-music-player-app.netlify.app)
 
 ![React Music Player App](https://i.imgur.com/1RKD9bT.png)
 
