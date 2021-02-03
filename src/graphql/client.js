@@ -23,7 +23,7 @@ const httpLink = new HttpLink({
 
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
-  uri: "ws://react-apollo-music.herokuapp.com/v1/graphql", // use wss for a secure endpoint
+  uri: "wss://react-apollo-music.herokuapp.com/v1/graphql", // use wss for a secure endpoint
   options: {
     reconnect: true,
   },
