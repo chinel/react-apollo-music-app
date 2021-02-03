@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "0px 15px",
   },
   content: {
-    flex: "1 0 auto",
+    width: "280px",
   },
   thumbnail: {
     width: 150,
@@ -91,7 +91,7 @@ function SongPlayer() {
   }
 
   function handlePlayNextSong() {
-    const nextSong = data.queue[positionInQueue - 1];
+    const nextSong = data.queue[positionInQueue + 1];
     if (nextSong) {
       dispatch({ type: "SET_SONG", payload: { song: nextSong } });
     }
@@ -108,8 +108,11 @@ function SongPlayer() {
     <>
       <Card variant="outlined" className={classes.container}>
         <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography variant="h5" component="h3">
+          <CardContent
+            className={classes.content}
+            style={{ overflow: "hidden", textOverflow: "ellipsis" }}
+          >
+            <Typography variant="h5" component="h3" noWrap>
               {state.song.title}
             </Typography>
             <Typography variant="subtitle1" component="p" color="textSecondary">
