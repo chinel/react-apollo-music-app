@@ -54,15 +54,19 @@ function SongPlayer() {
   const classes = useStyles();
 
   React.useEffect(() => {
-    const songIndex = data.queue.findIndex((song) => song.id === state.song.id);
+    const songIndex = data.queue.findIndex(
+      (song) => song.id === state.song?.id
+    );
     setPositionInQueue(songIndex);
   }, [data.queue, state.song.id]);
 
   React.useEffect(() => {
     const nextSong = data.queue[positionInQueue + 1];
     if (played === 1 && nextSong) {
+      console.log(positionInQueue + 1);
+      console.log("dispatch", nextSong);
       setPlayed(0);
-      dispatch({ type: "SET_SONG", payload: { nextSong } });
+      dispatch({ type: "SET_SONG", payload: { song: nextSong } });
     }
   }, [data.queue, dispatch, played, positionInQueue]);
 
@@ -88,7 +92,7 @@ function SongPlayer() {
     return new Date(seconds * 1000).toISOString().substr(11, 8);
   }
 
-  return (
+  return state.song ? (
     <>
       <Card variant="outlined" className={classes.container}>
         <div className={classes.details}>
@@ -145,6 +149,8 @@ function SongPlayer() {
       </Card>
       <QueuedSongList queue={data.queue} />
     </>
+  ) : (
+    <p>Loading</p>
   );
 }
 

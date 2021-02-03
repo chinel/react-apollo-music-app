@@ -49,9 +49,10 @@ export default function Song({ song }) {
   const [currentSongPlaying, setCurrentSongPlaying] = useState(false);
 
   useEffect(() => {
-    const isSongPlaying = state.isPlaying && id === state.song.id;
+    console.log(state.song);
+    const isSongPlaying = state.isPlaying && id === state.song?.id;
     setCurrentSongPlaying(isSongPlaying);
-  }, [id, state.song.id, state.isPlaying]);
+  }, [id, state.song, state.isPlaying]);
 
   //conditionally dispatch an action type based on the state
   function handleTogglePlay() {
