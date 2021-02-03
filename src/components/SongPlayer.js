@@ -127,7 +127,7 @@ function SongPlayer() {
                 <PlayArrow className={classes.playIcon} />
               )}
             </IconButton>
-            <IconButton>
+            <IconButton onClick={handlePlayNextSong}>
               <SkipNext />
             </IconButton>
             <Typography variant="subtitle1" component="p" color="textSecondary">
