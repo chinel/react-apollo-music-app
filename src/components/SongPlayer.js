@@ -90,6 +90,13 @@ function SongPlayer() {
     return new Date(seconds * 1000).toISOString().substr(11, 8);
   }
 
+  function handlePlayPrevSong() {
+    const prevSong = data.queue[positionInQueue - 1];
+    if (prevSong) {
+      dispatch({ type: "SET_SONG", payload: { song: prevSong } });
+    }
+  }
+
   return state.song ? (
     <>
       <Card variant="outlined" className={classes.container}>
