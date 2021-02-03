@@ -2,7 +2,7 @@
 
 ### [Live Site](https://quirky-spence-84429b.netlify.app)
 
-![React Music Player App](https://i.imgur.com/Wsk8Tva.png)
+![React Music Player App](https://i.imgur.com/1RKD9bT.png)
 
 ## Introduction
 
