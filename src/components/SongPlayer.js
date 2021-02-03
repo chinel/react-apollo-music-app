@@ -90,6 +90,13 @@ function SongPlayer() {
     return new Date(seconds * 1000).toISOString().substr(11, 8);
   }
 
+  function handlePlayNextSong() {
+    const nextSong = data.queue[positionInQueue - 1];
+    if (nextSong) {
+      dispatch({ type: "SET_SONG", payload: { song: nextSong } });
+    }
+  }
+
   function handlePlayPrevSong() {
     const prevSong = data.queue[positionInQueue - 1];
     if (prevSong) {
