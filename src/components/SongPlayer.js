@@ -103,7 +103,7 @@ function SongPlayer() {
             </Typography>
           </CardContent>
           <div className={classes.controls}>
-            <IconButton>
+            <IconButton onClick={handlePlayPrevSong}>
               <SkipPrevious />
             </IconButton>
             <IconButton onClick={handleTogglePlay}>
