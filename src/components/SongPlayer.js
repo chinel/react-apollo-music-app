@@ -63,8 +63,6 @@ function SongPlayer() {
   React.useEffect(() => {
     const nextSong = data.queue[positionInQueue + 1];
     if (played === 1 && nextSong) {
-      console.log(positionInQueue + 1);
-      console.log("dispatch", nextSong);
       setPlayed(0);
       dispatch({ type: "SET_SONG", payload: { song: nextSong } });
     }

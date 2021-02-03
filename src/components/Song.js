@@ -49,7 +49,6 @@ export default function Song({ song }) {
   const [currentSongPlaying, setCurrentSongPlaying] = useState(false);
 
   useEffect(() => {
-    console.log(state.song);
     const isSongPlaying = state.isPlaying && id === state.song?.id;
     setCurrentSongPlaying(isSongPlaying);
   }, [id, state.song, state.isPlaying]);

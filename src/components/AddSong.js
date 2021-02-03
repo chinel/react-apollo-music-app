@@ -57,7 +57,6 @@ function AddSong() {
   }, [url]);
 
   function handleChangeSong(event) {
-    console.log(event);
     const { name, value } = event.target;
     setSong((prevSong) => ({
       ...prevSong,
