@@ -62,7 +62,7 @@ function SongPlayer() {
 
   React.useEffect(() => {
     const nextSong = data.queue[positionInQueue + 1];
-    if (played === 1 && nextSong) {
+    if (played >= 0.99 && nextSong) {
       setPlayed(0);
       dispatch({ type: "SET_SONG", payload: { song: nextSong } });
     }
